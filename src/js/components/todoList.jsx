@@ -7,7 +7,8 @@ export const TodoList = () =>{
         setinputvalue(e.target.value)
     }
 
-    const handleOnClick =() =>{
+    const handelOnSubmit =(e) =>{
+        e.preventDefault();
         setTodos([...todos, inputvalue])
     }
 
@@ -18,20 +19,21 @@ export const TodoList = () =>{
 
     return(
         <div className="container">
-            <h2>todolist</h2>
-            <div className="container__input">
+            <h3>ToDoList</h3>
+            <form onSubmit={handelOnSubmit}>
+            <div>
                 <input type="text" value={inputvalue} onChange={handleOnChange}/>
-                <button className="btn-Add" onClick={handleOnClick}>Add</button>
             </div>
+            </form>
             <ul className="lista">
                 {
                     todos.length > 0 ? todos.map((todos,index) =>{
                         return (
-                            <li key={index}>{todos}lista de tareas<button className="btn-Delete" onClick={()=> handleDelete(index)}>Delete</button></li>
+                            <li className="list" key={index}>{todos}<button className="btn-Delete" onClick={()=> handleDelete(index)}><i class="fa-solid fa-x"></i></button></li>
                         )
                     })
                     :
-                    <p className="mt-3">No Hay Tareas Aun</p>
+                    <p>no tasks, add tasks</p>
                 }
             </ul>
         </div>
